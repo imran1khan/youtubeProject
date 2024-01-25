@@ -17,7 +17,28 @@ export const UserSignUp = async(req:Request,res:Response)=>{
             });
         }
     } catch (error) {
-        console.log(error);
+        res.json({
+            message : 'intenal server error',
+        });
+    }
+}
+export const UserLogin = async(req:Request,res:Response)=>{
+    try {
+        const {username,password} = req.body;
+        const user = await User.findOne({username,password});
+        if (user) {
+            res.json({
+                _id : user.id,
+                message : 'login successfully'
+            });
+        } 
+        else{
+            res.status(403).json({
+                _id : undefined,
+                message : 'login unsuccessfull'
+            });
+        }
+    } catch (error) {
         res.json({
             message : 'intenal server error',
         });
