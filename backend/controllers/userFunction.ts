@@ -6,18 +6,19 @@ export const UserSignUp = async(req:Request,res:Response)=>{
         const user = await User.findOne({username,password});
         if (!user) {
             const newUser = await User.create({username,password});
-            res.json({
+            res.status(200).json({
                 _id : newUser._id,
                 message:'user created successfully',
             });
         }
         else{
-            res.json({
+            res.status(400).json({
+                _id: user._id,
                 message : "User already excist",
             });
         }
     } catch (error) {
-        res.json({
+        res.status(500).json({
             message : 'intenal server error',
         });
     }
