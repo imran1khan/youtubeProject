@@ -1,10 +1,8 @@
 import express from "express";
+import { UserRouter } from "../routes/userRoutes";
 const app = express();
-app.get('/',(req,res)=>{
-    res.json({
-        msg : "new change",
-    });
-});
+app.use(express.json());
+app.use('/user',UserRouter);
 app.listen(3000,()=>{
     console.log('http://localhost:3000/');
 });
