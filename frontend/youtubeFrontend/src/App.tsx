@@ -1,12 +1,14 @@
-import LoginSignUp from "./pages/LoginSignUp.tsx"
+import { Outlet } from "react-router-dom";
+import Banner from "./components/Banner";
 
 
 function App() {
 
   return (
-    <>
-    <LoginSignUp/>
-    </>
+    <div id="detailStucture">
+      <Banner/>
+      <Outlet/>
+    </div>
   )
 }
 

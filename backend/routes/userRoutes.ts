@@ -4,7 +4,7 @@ const UserRouter = Router();
 
 
 UserRouter.route('/signup').post(UserSignUp);
-UserRouter.route('/login').get(UserLogin);
+UserRouter.route('/login').post(UserLogin);
 export{
     UserRouter,
 }
