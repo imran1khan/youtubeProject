@@ -1,9 +1,16 @@
 import axios from "axios";
 import { useState } from "react"
 import toast from "react-hot-toast";
+import { useCookies } from 'react-cookie';
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { CookieAtom } from "../store/cookieSetup";
 function LoginCard() {
+    const navigate = useNavigate();
+    const cookieAtom = useSetRecoilState(CookieAtom);
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
+    const [cookies, setCookie] = useCookies(['token']);
     const signUpFunction = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         if (username === '' || password === '') {
@@ -17,7 +24,12 @@ function LoginCard() {
           });
           if (res.data) {
             const { _id, message } = res.data;
-            console.log(_id, message);
+            if (_id) {
+              setCookie('token', _id, { path: '/' });
+              cookieAtom(cookies.token);
+              toast.success(message);
+              navigate('/home');
+            }
           }
         } catch (error) {
           if (axios.isAxiosError(error)) {
