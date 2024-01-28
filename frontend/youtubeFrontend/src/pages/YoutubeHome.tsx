@@ -1,21 +1,13 @@
-import { useEffect } from "react";
-import { useCookies } from "react-cookie"
-import { useNavigate } from "react-router-dom";
+import { useCheckCookie } from "../hooks/CheckCookie";
 
 function YoutubeHome() {
-  const navigate = useNavigate();
-  const [cookie] = useCookies(['token']);
-  useEffect(() => {
-    if (!cookie.token) {
-      navigate('/');
-    }
-  }, [cookie.token]);
+  useCheckCookie();
   return (
     <div className="bg-black flex h-screen">
       <div id="sideBar" className="bg-orange-500 flex justify-center w-[5%]">
         <div className="w-8 space-y-5 m-2">
           <div id="homeLogo">
-            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false"
+            <svg xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false"
               className="cursor-pointer block w-full h-full"><g><path d="M4 21V10.08l8-6.96 8 6.96V21h-6v-6h-4v6H4z"></path></g></svg>
             <div className="text-center text-sm">Home</div>
           </div>
@@ -25,12 +17,12 @@ function YoutubeHome() {
             <div className="text-center text-sm">Shorts</div>
           </div>
           <div id="Subscriptions">
-            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false"
+            <svg xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false"
               className="cursor-pointer block w-full h-full"><path d="M10 18v-6l5 3-5 3zm7-15H7v1h10V3zm3 3H4v1h16V6zm2 3H2v12h20V9zM3 10h18v10H3V10z"></path></svg>
             <div className="text-center text-sm">Sub</div>
           </div>
           <div id="You">
-            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" className="cursor-pointer block w-full h-full"><path d="m11 7 6 3.5-6 3.5V7zm7 13H4V6H3v15h15v-1zm3-2H6V3h15v15zM7 17h13V4H7v13z"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" className="cursor-pointer block w-full h-full"><path d="m11 7 6 3.5-6 3.5V7zm7 13H4V6H3v15h15v-1zm3-2H6V3h15v15zM7 17h13V4H7v13z"></path></svg>
             <div className="text-center text-sm">You</div>
           </div>
         </div>
