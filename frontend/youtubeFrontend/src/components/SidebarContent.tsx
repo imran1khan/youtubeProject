@@ -8,10 +8,13 @@ interface inputProp {
 function SidebarContent({ path, svg, textContent }: inputProp) {
     return (
         <NavLink to={path}>
-            <div id="one" className="flex items-center h-11 gap-5 pl-6 hover:bg-slate-900">
-                {svg}
-                <div>{textContent}</div>
-            </div>
+            {({ isActive}) => (
+                <div id="one" className={`flex items-center h-11 gap-5 pl-6 
+                ${isActive? "hover:bg-red-400" : "hover:bg-slate-900"} ${isActive?'bg-red-700':''}`}>
+                    {svg}
+                    <div>{textContent}</div>
+                </div>
+            )}
         </NavLink>
     )
 }

@@ -9,22 +9,25 @@ import { Toaster } from 'react-hot-toast';
 import YoutubeHome from './pages/YoutubeHome';
 import App from './App';
 import DashBoard from './pages/DashBoard';
-const router= createBrowserRouter(createRoutesFromElements(
+import ContentPage from './pages/ContentPage';
+const router = createBrowserRouter(createRoutesFromElements(
   <>
-  <Route path='/' element={<LoginSignUp/>}/>
-  <Route path='/home' element={<App/>}>
-    <Route path='' element={<YoutubeHome/>}/>
-    <Route path='/home/dashboard' element={<DashBoard/>}/>
-  </Route>
+    <Route path='/' element={<LoginSignUp />} />
+    <Route path='/home' element={<App />}>
+      <Route path='' element={<YoutubeHome />} />
+      <Route path='/home/dashboard' element={<DashBoard />}>
+        <Route path='/home/dashboard' element={<ContentPage/>}/>
+      </Route>
+    </Route>
   </>
 ));
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RecoilRoot>
-    <CookiesProvider>
-    <RouterProvider router={router}/>
-    <Toaster/>
-    </CookiesProvider>
+      <CookiesProvider>
+        <RouterProvider router={router} />
+        <Toaster />
+      </CookiesProvider>
     </RecoilRoot>
   </React.StrictMode>,
 )
