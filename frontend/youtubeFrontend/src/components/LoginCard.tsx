@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { CookieAtom } from "../store/cookieSetup";
+import { CookieAtom } from "../store/recoilAtom";
 function LoginCard() {
   const navigate = useNavigate();
   const cookieAtom = useSetRecoilState(CookieAtom);

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
 import { NavLink, useLocation } from "react-router-dom";
+import { UploadVideoAtom } from "../store/recoilAtom";
+import { useSetRecoilState } from "recoil";
 
 
 
 function Banner() {
   const [showBell,setShowBell] = useState(true);
+  const setUploadVideoAtom = useSetRecoilState(UploadVideoAtom);
   const loaction = useLocation();
   useEffect(() => {
     if (loaction.pathname === '/home/dashboard') {
@@ -14,6 +17,11 @@ function Banner() {
       setShowBell(true);
     }
   }, [loaction]);
+  const showVideoUploadDiv=()=>{
+    if (loaction.pathname === '/home/dashboard') {
+      setUploadVideoAtom(true);
+    }
+  }
   return (
     <div className="bg-gray-500 h-16 flex justify-between">
       <div id="logoAndMenu" className=" flex justify-center items-center">
@@ -64,7 +72,7 @@ function Banner() {
       </div>
       <div id="userSection" className=" flex justify-center items-center">
         <div className="flex gap-8 m-5">
-          <div id="createVideo">
+          <div onClick={showVideoUploadDiv} id="createVideo">
             <NavLink to='/home/dashboard'>
               <svg xmlns="http://www.w3.org/2000/svg" height="24"
                 className="cursor-pointer block w-full h-full"

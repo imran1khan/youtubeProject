@@ -4,15 +4,17 @@ import SidebarContent from "../components/SidebarContent";
 import { useCheckCookie } from "../hooks/CheckCookie"
 import { SettingSideBar, SidebarAtom } from "../store/SideBarList";
 import VideoUpload from "./VideoUpload";
+import { UploadVideoAtom } from "../store/recoilAtom";
 
 
 function DashBoard() {
   useCheckCookie();
   const SvgList = useRecoilValue(SidebarAtom);
   const SvgSetting = useRecoilValue(SettingSideBar);
+  const UploadVideo = useRecoilValue(UploadVideoAtom);
   return (
     <div className="flex h-screen">
-      <div className="fixed top-0 z-10  text-white backdrop-blur-sm bg-black/50 w-full h-full flex justify-center items-center">
+      <div className={`fixed top-0 z-10 text-white backdrop-blur-sm bg-black/50 w-full h-full ${UploadVideo?'flex':'hidden'} justify-center items-center`}>
         <VideoUpload/>
       </div>
       <div id="sideBar" className="bg-slate-800 w-[15%] text-white relative">
