@@ -7,7 +7,11 @@ const VideoUploadSchema = new mongoose.Schema(
             ref: 'User'
         },
         title:String,
-        discription:String,
+        description:String,
+        like:Number,
+        dislike:Number,
+        views:Number,
+        url:String,
     },
     {
         timestamps:true

@@ -10,7 +10,7 @@ UserRouter.route('/login').post(UserLogin);
 UserRouter.route('/upload-video').post(
     upload.fields([
         {
-            name:'video',
+            name:'videofile',
             maxCount:1,
         }
     ]),
