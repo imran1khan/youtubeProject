@@ -12,6 +12,8 @@ const VideoUploadSchema = new mongoose.Schema(
         dislike:Number,
         views:Number,
         url:String,
+        secure_url:String,
+        public_id:String
     },
     {
         timestamps:true

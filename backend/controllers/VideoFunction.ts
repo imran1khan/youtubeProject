@@ -19,7 +19,6 @@ export const uploadVideo = async (req: Request, res: Response) => {
             });
         }
         // here upload the video on the cloudinery logic
-        console.log("videoLocalPath");
         let videoLocalPath: string;
         if (req.files && ('videofile' in req.files) && req.files.videofile && req.files.videofile.length > 0) {
             videoLocalPath = req.files.videofile[0].path;
@@ -43,7 +42,9 @@ export const uploadVideo = async (req: Request, res: Response) => {
                 like: 0,
                 dislike: 0,
                 views: 0,
-                url: resData?.url
+                url: resData?.url,
+                secure_url:resData?.secure_url,
+                public_id:resData?.public_id
             }
         );
         const videoArr = await VideoList.findOne({ creator: userId });

@@ -13,7 +13,6 @@ export const uploadOnCloudinery = async (localFilePath:string)=>{
         const result = await cloudinary.uploader.upload(localFilePath,{
             resource_type:'auto',
         });
-        console.log(result)
         fs.unlinkSync(localFilePath);
         return result;
     } catch (error) {
