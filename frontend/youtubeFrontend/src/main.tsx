@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
@@ -11,12 +11,13 @@ import App from './App';
 import DashBoard from './pages/DashBoard';
 import ContentPage from './pages/ContentPage';
 import VideosShow from './pages/VideosShow';
+// import VideoShow2 from './Meight_be_useFull/VideoShow2';
 const router = createBrowserRouter(createRoutesFromElements(
   <>
     <Route path='/' element={<LoginSignUp />} />
     <Route path='/home' element={<App />}>
       <Route path='/home/' element={<YoutubeHome />}>
-        <Route path='/home/' element={<VideosShow/>}/>
+        <Route path='/home/' element={<Suspense fallback={<div>loading...</div>}><VideosShow/></Suspense>}/>
       </Route>
       <Route path='/home/dashboard' element={<DashBoard />}>
         <Route path='/home/dashboard' element={<ContentPage/>}/>
