@@ -1,10 +1,11 @@
+import { Outlet } from "react-router-dom";
 import { useCheckCookie } from "../hooks/CheckCookie";
 
 function YoutubeHome() {
   useCheckCookie();
   return (
     <div className="bg-black flex h-screen">
-      <div id="sideBar" className="bg-orange-500 flex justify-center w-[5%]">
+      <div id="sideBar" className="bg-orange-500 max-md:hidden flex justify-center w-[5%]">
         <div className="w-8 space-y-5 m-2">
           <div id="homeLogo">
             <svg xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false"
@@ -27,7 +28,7 @@ function YoutubeHome() {
           </div>
         </div>
       </div>
-      <div id="videoSection" className="bg-blue-600 flex-grow">videos</div>
+      <Outlet/>
     </div>
   )
 }

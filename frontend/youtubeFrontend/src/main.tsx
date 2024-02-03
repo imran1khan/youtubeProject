@@ -10,11 +10,14 @@ import YoutubeHome from './pages/YoutubeHome';
 import App from './App';
 import DashBoard from './pages/DashBoard';
 import ContentPage from './pages/ContentPage';
+import VideosShow from './pages/VideosShow';
 const router = createBrowserRouter(createRoutesFromElements(
   <>
     <Route path='/' element={<LoginSignUp />} />
     <Route path='/home' element={<App />}>
-      <Route path='' element={<YoutubeHome />} />
+      <Route path='/home/' element={<YoutubeHome />}>
+        <Route path='/home/' element={<VideosShow/>}/>
+      </Route>
       <Route path='/home/dashboard' element={<DashBoard />}>
         <Route path='/home/dashboard' element={<ContentPage/>}/>
       </Route>
