@@ -5,6 +5,7 @@ import { Gravity } from "@cloudinary/url-gen/qualifiers";
 import { AutoFocus } from "@cloudinary/url-gen/qualifiers/autoFocus";
 import { cld } from "../CloudineryTools/Cloudinery"
 import { AdvancedVideo } from '@cloudinary/react';
+import { NavLink } from "react-router-dom";
 
 interface VideoProp {
   public_id: string,
@@ -15,7 +16,8 @@ function VideoThumbCard({ public_id }: VideoProp) {
     .gravity(Gravity.autoGravity().autoFocus(AutoFocus.focusOn(FocusOn.faces())))) // Crop the video, focusing on the faces.
     .roundCorners(byRadius(0));
   return (
-    <div className="bg-red-400 h-auto w-full border border-black">
+    <NavLink to={`/home/${public_id}`}>
+    <div className="cursor-pointer bg-red-400 h-auto w-full border border-black">
       <AdvancedVideo cldVid={myVideo} className="w-full"/>
       <div className="bg-slate-600 grid grid-cols-12">
         <div className="col-span-1  flex justify-center items-center">
@@ -32,6 +34,7 @@ function VideoThumbCard({ public_id }: VideoProp) {
         </div>
       </div>
     </div>
+    </NavLink>
   )
 }
 

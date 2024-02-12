@@ -23,7 +23,7 @@ function Banner() {
     }
   }
   return (
-    <div className="bg-gray-500 h-16 sticky top-0 z-10 flex justify-between">
+    <div id="YTbanner" className="bg-gray-500 h-16 sticky top-0 z-10 flex justify-between">
       <div id="logoAndMenu" className=" flex justify-center items-center">
         <div className="flex gap-4 p-4">
           <div id="menuSvg">
