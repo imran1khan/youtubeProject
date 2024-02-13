@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { VideoDetailSchema, VideoList } from "../db";
+import { VideoCommentSch, VideoDetailSchema, VideoList } from "../db";
 import { Multer } from "multer";
 import { uploadOnCloudinery } from "../Cloudinery";
 
@@ -47,6 +47,7 @@ export const uploadVideo = async (req: Request, res: Response) => {
                 public_id:resData?.public_id
             }
         );
+        await VideoCommentSch.create({VideoRef:videoFile.id});
         const videoArr = await VideoList.findOne({ creator: userId });
         if (videoArr) {
             videoArr.videoUrlArray.push(videoFile._id);
