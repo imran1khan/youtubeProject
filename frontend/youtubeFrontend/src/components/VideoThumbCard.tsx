@@ -11,15 +11,16 @@ interface VideoProp {
   public_id: string,
   title:string,
   description:string,
+  videoId:string,
 }
-function VideoThumbCard({ public_id,title,description }: VideoProp) {
+function VideoThumbCard({ public_id,title,description,videoId }: VideoProp) {
   const navigate = useNavigate();
   const myVideo = cld.video(public_id);
   myVideo.resize(fill()
     .gravity(Gravity.autoGravity().autoFocus(AutoFocus.focusOn(FocusOn.faces())))) // Crop the video, focusing on the faces.
     .roundCorners(byRadius(0));
   const navigateTo=()=>{
-    navigate(`/home/${public_id}`,{state:{title,description}});
+    navigate(`/home/${public_id}`,{state:{title,description,videoId}});
   }
   return (
     <div onClick={navigateTo} className="cursor-pointer bg-gray-600 h-auto w-full border border-black">
@@ -29,7 +30,7 @@ function VideoThumbCard({ public_id,title,description }: VideoProp) {
           <img src="/src/assets/channels4_profile.jpg" className="rounded-full" alt="" srcSet="" />
         </div>
         <div className="col-span-11 ">
-          <div id="videoTitle">
+          <div id="videoTitle" className="text-white">
             {title}
           </div>
           <div>

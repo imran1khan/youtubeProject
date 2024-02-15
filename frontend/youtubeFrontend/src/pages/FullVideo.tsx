@@ -9,10 +9,13 @@ import { byRadius } from "@cloudinary/url-gen/actions/roundCorners";
 import { useLocation, useParams } from "react-router-dom";
 import SuggestedVideo from "../components/SuggestedVideo";
 import { useCheckCookie, useGetVideos } from "../hooks/CheckCookie";
+import CommentComp from "../components/CommentComp";
+import AllComments from "../components/AllComments";
 
 interface loactionInterface {
     title : string,
     description:string
+    videoId:string
 }
 function FullVideo() {
     // const [remainHeight] = useGetLeftOverBannerHeight();
@@ -20,7 +23,7 @@ function FullVideo() {
     const videos = useGetVideos();
     const param = useParams();
     const loaction = useLocation();
-    const {title,description} = loaction.state as loactionInterface;// i want to tell my typescript that title and description is string
+    const {title,description,videoId} = loaction.state as loactionInterface;
     const myVideo = cld.video(param.id);
     myVideo.resize(fill()
         .gravity(Gravity.autoGravity().autoFocus(AutoFocus.focusOn(FocusOn.faces()))))
@@ -48,9 +51,15 @@ function FullVideo() {
                     </div>
                     <div>{description}</div>
                 </div>
-                <div>commemts</div>
+                <br />
+                <div className="">
+                    <CommentComp videoId={videoId}/>
+                </div>
+                <br />
+                <AllComments videoId={videoId}/>
             </div>
-            <div className="bg-yellow-900 flex-1">{videos.map((iVideo)=>(<SuggestedVideo key={iVideo._id} public_id={iVideo.public_id}/>))}</div>
+            <div className="space-y-1 flex-1">{videos.map((iVideo)=>(<SuggestedVideo key={iVideo._id} title={iVideo.title} 
+            description={iVideo.description} public_id={iVideo.public_id}/>))}</div>
         </div>
     )
 }

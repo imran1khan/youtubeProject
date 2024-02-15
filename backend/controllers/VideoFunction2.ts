@@ -46,8 +46,34 @@ export const PostComment = async (req: Request, res: Response) => {
             });
         }
         requireVideo.commentsList.push({Comment:Comment,CreatorId:UserId});
-        requireVideo.save();
+        await requireVideo.save();
         return res.status(200).json({
+            message: 'Comment posted successfully',
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Internal server error',
+        });
+    }
+}
+
+export const getComments = async (req: Request, res: Response) => {
+    try {
+        const videoId = req.query.videoId as string;
+        if (!videoId) {
+            return res.json({
+                message: 'invalid query'
+            })
+        }
+        const requireVideo = await VideoCommentSch.findOne({VideoRef:videoId});
+        if (!requireVideo) {
+            return res.status(404).json({
+                message: 'no video found',
+            });
+        }
+        const comments = requireVideo.commentsList;
+        return res.status(200).json({
+            comments,
             message: 'Comment posted successfully',
         });
     } catch (error) {

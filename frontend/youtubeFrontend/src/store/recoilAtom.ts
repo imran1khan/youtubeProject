@@ -9,3 +9,13 @@ export const UploadVideoAtom = atom({
   key:'UploadVideoAtom',
   default: true,
 });
+
+export const CommentsAtom = atom({
+  key:'CommentsAtom',
+  default:'',
+});
+
+export const reRanderComment=atom({
+  key:'reRanderComment',
+  default:false,
+});
