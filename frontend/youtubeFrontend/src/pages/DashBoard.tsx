@@ -18,7 +18,7 @@ function DashBoard() {
         <VideoUpload/>
       </div>
       <div id="sideBar" className="bg-slate-800 w-[15%] text-white relative">
-        <div className="bg-blue-800 h-[25%] w-full flex flex-col items-center gap-2 justify-center">
+        <div className=" h-[25%] w-full flex flex-col items-center gap-2 justify-center">
           <img className="rounded-full h-32 w-32" src="https://yt3.ggpht.com/DX89GV9x1g6YHtbRRTMSF4GTw4zxELXvtVyCO-y9EKZbEMtGc1T-oaATulWnG466IyVYoz6f=s176-c-k-c0x00ffffff-no-rj" alt="" />
           <div className="text-center">your_channel</div>
           <div className="text-center">simrran_sultan</div>
@@ -26,11 +26,11 @@ function DashBoard() {
         <div className="bg-slate-950 flex flex-col gap-3 py-2">
           {SvgList.map((item, index) => (<SidebarContent key={index} path={item.path} textContent={item.textContent} svg={item.svg} />))}
         </div>
-        <div className="bg-purple-900 w-full absolute bottom-0">
+        <div className="bg-slate-950 w-full absolute bottom-0">
           {SvgSetting.map((item, index) => (<SidebarContent key={index} path={item.path} textContent={item.textContent} svg={item.svg} />))}
         </div>
       </div>
-      <div className="bg-red-500 flex-grow"><Outlet/></div>
+      <div className="bg-gray-900 text-white flex-grow"><Outlet/></div>
     </div>
   )
 }
