@@ -9,7 +9,11 @@ export const getVideos = async (req: Request, res: Response) => {
                 message: 'invalid query'
             });
         }
-        const videoArray = await VideoDetailSchema.find().limit(Number(numberOfVidoes));
+        const videoArray = await VideoDetailSchema.aggregate([
+            { $sample: { size: Number(numberOfVidoes) } }, // Sample random documents
+            { $addFields: { randomOrder: { $rand: {} } } }, // Add a random number field to each document
+            { $sort: { randomOrder: 1 } } // Sort documents by the random number field to shuffle
+        ]);
         if (!videoArray || videoArray.length <= 0) {
             return res.status(404).json({
                 message: 'no video found',

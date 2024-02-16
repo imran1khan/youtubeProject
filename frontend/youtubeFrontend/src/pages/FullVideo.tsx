@@ -53,12 +53,12 @@ function FullVideo() {
                 </div>
                 <br />
                 <div className="">
-                    <CommentComp videoId={videoId}/>
+                <CommentComp videoId={videoId}/>
                 </div>
                 <br />
                 <AllComments videoId={videoId}/>
             </div>
-            <div className="space-y-1 flex-1">{videos.map((iVideo)=>(<SuggestedVideo key={iVideo._id} title={iVideo.title} 
+            <div className="space-y-1 flex-1">{videos.map((iVideo)=>(<SuggestedVideo key={iVideo._id} videoId={iVideo._id} title={iVideo.title} 
             description={iVideo.description} public_id={iVideo.public_id}/>))}</div>
         </div>
     )

@@ -18,13 +18,22 @@ export const useCheckCookie = () => {
   }, [cookie.token]);
 }
 
+//suffel videos
+const shuffleArray = <T>(array:T[]):T[]=>{
+  for (let i = array.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [array[i],array[j]]=[array[j],array[i]]
+  }
+  return array;
+}
 export const useGetVideos = () => {
   const [videos, setVideos] = useState<videoList[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responce = await axios.get<VideoResponce>(`http://localhost:3000/video/VideoArray?length=15`);
-        setVideos(responce.data.videoArray);
+        const suffelList = shuffleArray(responce.data.videoArray);
+        setVideos(suffelList);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

@@ -10,17 +10,18 @@ import { useNavigate } from "react-router-dom";
 interface suggestedVideoProp {
   public_id : string
   title:string
-  description:string
+  description:string,
+  videoId:string
 }
 
-function SuggestedVideo({public_id,title,description}:suggestedVideoProp) {
+function SuggestedVideo({public_id,title,description,videoId}:suggestedVideoProp) {
   const navigate = useNavigate();
   const myVideo = cld.video(public_id);
   myVideo.resize(fill()
       .gravity(Gravity.autoGravity().autoFocus(AutoFocus.focusOn(FocusOn.faces()))))
       .roundCorners(byRadius(0));
   const navigateTo=()=>{
-    navigate(`/home/${public_id}`,{state:{title,description}});
+    navigate(`/home/${public_id}`,{state:{title,description,videoId}});
   }
   return (
     <div onClick={navigateTo} className=" flex cursor-pointer">
