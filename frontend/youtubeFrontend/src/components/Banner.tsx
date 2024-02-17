@@ -3,6 +3,8 @@ import { NavLink, useLocation } from "react-router-dom";
 import { UploadVideoAtom } from "../store/recoilAtom";
 import { useSetRecoilState } from "recoil";
 import DDMenuProfile from "./DDMenuProfile";
+import { getVideosList } from "../hooks/CheckCookie";
+import { videoList } from "../store/GetVideos";
 
 
 
@@ -25,6 +27,16 @@ function Banner() {
       setUploadVideoAtom(true);
     }
   }
+  //this is for suggetion box in the search-bar
+  const [allVideosSugg,setAllVideosSugg] = useState('');
+  const [allVideoList,setAllVideoList]=useState<videoList[]>([]);
+  useEffect(()=>{
+    const getData=async()=>{
+      const data = await getVideosList(allVideosSugg)??[];
+      setAllVideoList(data);
+    }
+    getData();
+  },[allVideosSugg]);
   return (
     <div id="YTbanner" className="bg-gray-500 h-16 sticky top-0 z-10 flex justify-between">
       <div id="logoAndMenu" className=" flex justify-center items-center">
@@ -58,19 +70,10 @@ function Banner() {
       <div id="SearchBox" className=" flex-grow flex justify-center py-4">
         <div id="searchComponent" className="flex justify-center gap-2 w-full">
           <div className="flex gap-2 w-1/2 justify-center">
-            <input onFocus={()=>{setShowSugg(true)}} onBlur={()=>{setTimeout(()=>{setShowSugg(false)},1000)}} className="w-full rounded-full px-5" type="text" placeholder="search" />
+            <input onFocus={()=>{setShowSugg(true)}} onChange={(e)=>{setAllVideosSugg(e.target.value)}} onBlur={()=>{setTimeout(()=>{setShowSugg(false)},1000)}} className="w-full rounded-full px-5" type="text" placeholder="search" />
             <div className={`${showSugg?'':'hidden'} absolute top-[3.1rem] left-[28%] bg-black text-white rounded-md w-[41%]`}>
               <ul className="p-4">
-                <li>1st suggestion</li>
-                <li>2nd suggestion</li>
-                <li>3rd suggestion</li>
-                <li>4th suggestion</li>
-                <li>5th suggestion</li>
-                <li>6th suggestion</li>
-                <li>7th suggestion</li>
-                <li>8th suggestion</li>
-                <li>9th suggestion</li>
-                <li>10th suggestion</li>
+                {allVideoList.map((iVideo)=>(<li key={iVideo._id+iVideo.__v}>{iVideo.title}</li>))}
               </ul>
             </div>
             <div>

@@ -86,3 +86,44 @@ export const getComments = async (req: Request, res: Response) => {
         });
     }
 }
+
+export const getVideoSuggestion = async (req: Request, res: Response) => {
+    try {
+        const RegexFilter = req.query.RegexFilter as string || '';
+        const limit = Number(req.query.limit) as number || 10;
+        console.log(limit)
+        if (!RegexFilter) {
+            return res.json({
+                message: 'invalid query'
+            })
+        }
+        const videoArray = await VideoDetailSchema.find({
+            $or:[
+                {
+                    title:{
+                        $regex:RegexFilter, $options: 'i'
+
+                    }
+                },
+                {
+                    description:{
+                        $regex:RegexFilter, $options: 'i'
+                    }
+                }
+            ]
+        }).limit(limit);
+        if (!videoArray) {
+            return res.status(404).json({
+                message: 'no video found',
+            });
+        }
+        return res.status(200).json({
+            videoArray,
+            message: 'got videos successfully',
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Internal server error',
+        });
+    }
+}

@@ -72,6 +72,25 @@ export const useGetAllComments=(videoId:string)=>{
   return allComment;
 }
 
+export const getVideosList=async(str:string)=>{
+  if(str===undefined || str.trim()===''){
+    str='';
+  }
+  try {
+    const responce = await axios.get<VideoResponce>('http://localhost:3000/video/getVideoSuggestion',{
+      params:{
+        RegexFilter:str,
+        limit:'10'
+      }
+    })
+    console.log(responce.data)
+    return responce.data.videoArray;
+  } catch (error) {
+    console.log(error)
+  }
+  return [];
+}
+
 export const useGetLeftOverBannerHeight = () => {
   const [remainHeight, setRemainHeight] = useState(0);
   useEffect(() => {
