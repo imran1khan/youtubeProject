@@ -7,6 +7,7 @@ import DDMenuProfile from "./DDMenuProfile";
 
 
 function Banner() {
+  const [showSugg,setShowSugg]=useState(false);//hidden:false show:true
   const [showBell,setShowBell] = useState(true);
   const [ddmProfile,setDDMprofile] = useState(false);
   const setUploadVideoAtom = useSetRecoilState(UploadVideoAtom);
@@ -57,7 +58,21 @@ function Banner() {
       <div id="SearchBox" className=" flex-grow flex justify-center py-4">
         <div id="searchComponent" className="flex justify-center gap-2 w-full">
           <div className="flex gap-2 w-1/2 justify-center">
-            <input className="w-full rounded-full px-5" type="text" placeholder="search" />
+            <input onFocus={()=>{setShowSugg(true)}} onBlur={()=>{setTimeout(()=>{setShowSugg(false)},1000)}} className="w-full rounded-full px-5" type="text" placeholder="search" />
+            <div className={`${showSugg?'':'hidden'} absolute top-[3.1rem] left-[28%] bg-black text-white rounded-md w-[41%]`}>
+              <ul className="p-4">
+                <li>1st suggestion</li>
+                <li>2nd suggestion</li>
+                <li>3rd suggestion</li>
+                <li>4th suggestion</li>
+                <li>5th suggestion</li>
+                <li>6th suggestion</li>
+                <li>7th suggestion</li>
+                <li>8th suggestion</li>
+                <li>9th suggestion</li>
+                <li>10th suggestion</li>
+              </ul>
+            </div>
             <div>
               <svg xmlns="http://www.w3.org/2000/svg"
                 enableBackground="new 0 0 24 24" height="24"

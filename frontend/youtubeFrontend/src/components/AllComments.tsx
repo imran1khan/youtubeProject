@@ -7,8 +7,7 @@ interface prop {
     videoId:string
 }
 function AllComments({videoId}:prop) {
-  console.log(videoId);
-    let allComments = useGetAllComments(videoId) ?? [];
+  let allComments = useGetAllComments(videoId) ?? [];
   return (
     <div className="space-y-2">
       {allComments.map((eComment) => (

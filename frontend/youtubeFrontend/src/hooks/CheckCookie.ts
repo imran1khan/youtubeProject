@@ -68,7 +68,7 @@ export const useGetAllComments=(videoId:string)=>{
       }
     }
     getComment();
-  },[reRander]);
+  },[reRander,videoId]);
   return allComment;
 }
 
