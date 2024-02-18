@@ -5,6 +5,7 @@ import { useSetRecoilState } from "recoil";
 import DDMenuProfile from "./DDMenuProfile";
 import { getVideosList } from "../hooks/CheckCookie";
 import { videoList } from "../store/GetVideos";
+import SearchSugg from "./SearchSugg";
 
 
 
@@ -73,7 +74,7 @@ function Banner() {
             <input onFocus={()=>{setShowSugg(true)}} onChange={(e)=>{setAllVideosSugg(e.target.value)}} onBlur={()=>{setTimeout(()=>{setShowSugg(false)},1000)}} className="w-full rounded-full px-5" type="text" placeholder="search" />
             <div className={`${showSugg?'':'hidden'} absolute top-[3.1rem] left-[28%] bg-black text-white rounded-md w-[41%]`}>
               <ul className="p-4">
-                {allVideoList.map((iVideo)=>(<li key={iVideo._id+iVideo.__v}>{iVideo.title}</li>))}
+                {allVideoList.map((iVideo)=>(<SearchSugg key={iVideo._id+iVideo.title} title={iVideo.title}/>))}
               </ul>
             </div>
             <div>

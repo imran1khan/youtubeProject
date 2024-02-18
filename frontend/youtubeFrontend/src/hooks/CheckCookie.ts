@@ -83,7 +83,6 @@ export const getVideosList=async(str:string)=>{
         limit:'10'
       }
     })
-    console.log(responce.data)
     return responce.data.videoArray;
   } catch (error) {
     console.log(error)

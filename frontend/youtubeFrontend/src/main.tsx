@@ -12,6 +12,7 @@ import DashBoard from './pages/DashBoard';
 import ContentPage from './pages/ContentPage';
 import VideosShow from './pages/VideosShow';
 import FullVideo from './pages/FullVideo';
+import SearchResultPage from './pages/SearchResultPage';
 // import VideoShow2 from './Meight_be_useFull/VideoShow2';
 const router = createBrowserRouter(createRoutesFromElements(
   <>
@@ -21,6 +22,9 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route path='/home/' element={<Suspense fallback={<div>loading...</div>}><VideosShow/></Suspense>}/>
       </Route>
       <Route path='/home/:id' element={<FullVideo/>}/>
+      <Route path='/home/results' element={<YoutubeHome/>}>
+        <Route path='/home/results/search_query?' element={<SearchResultPage/>}/>
+      </Route>
       <Route path='/home/dashboard' element={<DashBoard />}>
         <Route path='/home/dashboard' element={<ContentPage/>}/>
       </Route>
