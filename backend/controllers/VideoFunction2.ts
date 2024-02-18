@@ -91,7 +91,6 @@ export const getVideoSuggestion = async (req: Request, res: Response) => {
     try {
         const RegexFilter = req.query.RegexFilter as string || '';
         const limit = Number(req.query.limit) as number || 10;
-        console.log(limit)
         if (!RegexFilter) {
             return res.json({
                 message: 'invalid query'
