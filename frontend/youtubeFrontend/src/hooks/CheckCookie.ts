@@ -43,6 +43,22 @@ export const useGetVideos = () => {
   return videos;
 }
 
+export const useGetSearchVideos=(NumResponce:number,RegexStr:string)=>{
+  const [videos,setVideos]=useState<videoList[]>([]);
+  useEffect(()=>{
+    const fetchData=async()=>{
+      try {
+        const responce = await axios.get<VideoResponce>(`http://localhost:3000/video/getVideoSuggestion?RegexFilter=${RegexStr}&limit=${NumResponce}`);
+        setVideos(responce.data.videoArray);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchData();
+  },[RegexStr,NumResponce]);
+  return videos;
+}
+
 interface resCommenst{
   CreatorId:string,
   Comment:string,

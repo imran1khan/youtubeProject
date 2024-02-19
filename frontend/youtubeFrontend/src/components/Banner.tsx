@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { UploadVideoAtom } from "../store/recoilAtom";
 import { useSetRecoilState } from "recoil";
 import DDMenuProfile from "./DDMenuProfile";
@@ -10,6 +10,7 @@ import SearchSugg from "./SearchSugg";
 
 
 function Banner() {
+  const navigate = useNavigate();
   const [showSugg,setShowSugg]=useState(false);//hidden:false show:true
   const [showBell,setShowBell] = useState(true);
   const [ddmProfile,setDDMprofile] = useState(false);
@@ -77,7 +78,7 @@ function Banner() {
                 {allVideoList.map((iVideo)=>(<SearchSugg key={iVideo._id+iVideo.title} title={iVideo.title}/>))}
               </ul>
             </div>
-            <div>
+            <div onClick={()=>{navigate(`/home/results/search_query?query=${allVideosSugg}`,{state:{title:allVideosSugg}});}}>
               <svg xmlns="http://www.w3.org/2000/svg"
                 enableBackground="new 0 0 24 24" height="24"
                 viewBox="0 0 24 24" width="24"

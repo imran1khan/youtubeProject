@@ -5,19 +5,25 @@ import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AutoFocus } from "@cloudinary/url-gen/qualifiers/autoFocus";
 import { FocusOn } from "@cloudinary/url-gen/qualifiers/focusOn";
 import { byRadius } from "@cloudinary/url-gen/actions/roundCorners";
+import { useNavigate } from "react-router-dom";
 
 interface prop {
   title: string
   description: string
   public_id: string
+  videoId:string
 }
-function SearchResult({ title, public_id, description }: prop) {
+function SearchResult({ title, public_id, description,videoId }: prop) {
+  const navigate=useNavigate();
   const myVideo = cld.video(public_id);
   myVideo.resize(fill()
     .gravity(Gravity.autoGravity().autoFocus(AutoFocus.focusOn(FocusOn.faces())))) // Crop the video, focusing on the faces.
     .roundCorners(byRadius(40));
+  const navigateTo=()=>{
+    navigate(`/home/${public_id}`,{state:{title,description,videoId}});
+  }
   return (
-    <div className="w-3/4 flex gap-2">
+    <div onClick={navigateTo} className="w-3/4 flex gap-2 cursor-pointer hover:bg-[#030a14] rounded-[1rem]">
       <AdvancedVideo cldVid={myVideo} className="w-96 h-60" />
       <div className="flex flex-col">
         <div>

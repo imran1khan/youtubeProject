@@ -7,7 +7,7 @@ function SearchSugg({title}:prop) {
     const navigate = useNavigate();
     const MoveToSearchResultPage=()=>{
         ///home/results/search_query?
-        navigate(`/home/results/search_query?query=${title}`);
+        navigate(`/home/results/search_query?query=${title}`,{state:{title}});
     }
     return (
         <li onClick={MoveToSearchResultPage} className="cursor-pointer hover:bg-gray-900">{title}</li>
